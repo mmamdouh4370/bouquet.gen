@@ -30,9 +30,9 @@ export default function Home() {
 
       <section className="relative flex-1 w-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('/flowbackg.jpeg')`, height: "calc(100vh - 70px)"}}>
       <div className="absolute inset-0 backdrop-blur bg-black/80"></div>
-      <div className="absolute flex flex-row justify-start items-center left-32 top-1/2 space-x-96">
+      <div className="absolute flex flex-row justify-start items-center left-[10rem] top-1/2 space-x-96">
         <div className="-mt-96 space-y-64">
-          <p className="text-6xl text-offwhite -mt-156 font-bold z-10 transform -translate-y-1/3">
+          <p className="text-6xl text-offwhite  font-bold z-10 transform -translate-y-[20%] leading-[4.5rem]">
           🌺Generate thousands <br/> of bouquets rich in both <br/>meaning and aesthetic <br/>with the power of AI.🌼
           </p>
           <a href="/dashboard" className="ml-2 bg-cream hover:bg-lightcream text-tahit text-2xl font-bold py-5 px-10 rounded-md mt-4">
