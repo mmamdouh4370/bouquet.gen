@@ -1,9 +1,8 @@
 import { SignUp } from "@clerk/nextjs";
 import Image from "next/image";
-import Navbar from "@/components/navbar"
+import Navbar from "@/components/navbar";
 
-
-export default function SignInPage(){
+export default function SignInPage() {
   return (
     <main className="flex-col flex items-center w-full">
       <Navbar />
