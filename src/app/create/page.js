@@ -16,15 +16,30 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/api/gen", { prompt: inputText });
-      console.log(response);
-      const parsedData = JSON.parse(response.data.response);
-      const flowerData = parseFlowerData(parsedData);
+      const tmpResponse = {
+        "numOfFlowers": "5",
+        "flower1Name": "Roses",
+        "flower2Name": "Carnations",
+        "flower3Name": "Daisies",
+        "flower4Name": "Chrysanthemums",
+        "flower5Name": "Lilies",
+        "flower1Desc": "Roses symbolize love and joy, perfect for celebrating a new addition to the family.",
+        "flower2Desc": "Carnations represent admiration and love, suitable for a joyous occasion like a baby shower.",
+        "flower3Desc": "Daisies symbolize innocence and purity, reflecting the innocence of a new baby.",
+        "flower4Desc": "Chrysanthemums symbolize loyalty and longevity, expressing best wishes for the future.",
+        "flower5Desc": "Lilies signify new beginnings and purity, ideal for welcoming a new member into the family."
+      };
+      // const response = await axios.post("http://127.0.0.1:5000/api/gen", { prompt: inputText });
+      // console.log(response.data.response);
+      // const parsedData = JSON.parse(response.data.response);
+      // const flowerData = parseFlowerData(parsedData);
+      const flowerData = parseFlowerData(tmpResponse);
       setFlowers(flowerData);
       setIsSubmitted(true);
     } catch (error) {
       console.log("nooooooo :( ", error);
     } finally {
+      // Need to fix this, proccesing anim never gets to play due to how isLoading being true never gets to the html
       // setTimeout(() => {
       //   setIsLoading(false);
       // }, 2000);
@@ -78,11 +93,11 @@ export default function Home() {
             {isLoading ? (
               <p className="text-2xl text-tahit/90">Processing.....</p>
             ) : (
-              <div className="flex flex-wrap justify-center">
+              <div className="flex flex-1 flex-wrap justify-center items-center">
                 {flowers.map((flower, index) => (
-                  <div key={index} className="space-y-0 flex-1 mx-2 h-full p-4 bg-white text-center">
-                    <h2 className="text-xl font-bold">{flower.name}</h2>
-                    <p>{flower.description}</p>
+                  <div key={index} className="flex-1 h-[32rem] bg-gray-300 text-center flex flex-col justify-center border px-5">
+                    <h2 className="text-xl text-tahit font-bold">{flower.name}</h2>
+                    <p className="text-tahit">{flower.description}</p>
                   </div>
                 ))}
               </div>

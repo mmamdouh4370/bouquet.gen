@@ -1,5 +1,4 @@
 "use client"
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { SignInButton, SignOutButton, useAuth } from "@clerk/nextjs";
 
 export default function Navbar() {
