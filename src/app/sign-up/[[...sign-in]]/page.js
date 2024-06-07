@@ -1,6 +1,6 @@
 import { SignUp } from "@clerk/nextjs";
 import Image from "next/image";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 
 export default function SignInPage() {
   return (

@@ -15,7 +15,7 @@ module.exports = {
         'richrose': '#783b5a',
         'lightrose': '#aa6a6a',
         'cream': '#f8d3c5',
-        'lightcream': '#f8d7ca',
+        'lightcream': '#f2dfd8',
         'tahit': '#383139',
         'offwhite': '#fceee9',
         'bone': '#F9F6EE'
