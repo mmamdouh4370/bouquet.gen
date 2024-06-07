@@ -41,7 +41,7 @@ export default function Navbar() {
 
           {!sessionId ? (
             <a href="/sign-in"
-            className="ml-2 bg-cream hover:bg-lightcream text-tahit text-xl font-bold py-3 px-6 rounded-md mt-4"
+            className="ml-2 bg-cream hover:bg-lightcream text-tahit text-xl font-bold py-3 px-6 rounded-md -mt-2"
             >
               Sign in
             </a>
