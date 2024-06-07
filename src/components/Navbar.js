@@ -14,6 +14,7 @@ const DotIcon = () => {
   )
 }
 
+
 export default function Navbar() {
   const { sessionId } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);

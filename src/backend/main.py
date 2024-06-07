@@ -13,8 +13,8 @@ app = Flask(__name__)
 CORS(app)
 
 def searchImage(query):
-    api_key = "AIzaSyAxWTMoenEYXuQlCyQPet1B3Y8ZrJD_VjU"  # Replace with your actual Google API Key
-    cx = "d3ea2955b0ee54ff4"  # Replace with your actual CX
+    api_key = os.environ.get("GI_api_key")
+    cx = os.environ.get("GI_cx")
     search_type = "image"
     url = f"https://www.googleapis.com/customsearch/v1?key={api_key}&cx={cx}&searchType={search_type}&q={query}"
 
