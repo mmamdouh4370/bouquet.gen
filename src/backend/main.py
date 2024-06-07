@@ -68,7 +68,8 @@ def gen():
 
     for i in range(1, numFlowers+1): 
         flowerName = responseMessageDict[f"flower{i}Name"]
-        responseMessageDict[f"flower{i}Img"] = searchImage(flowerName)
+        searchQuery = f"{flowerName} flower"
+        responseMessageDict[f"flower{i}Img"] = searchImage(searchQuery)
 
     print(json.dumps(responseMessageDict))
     return jsonify(json.dumps(responseMessageDict))
