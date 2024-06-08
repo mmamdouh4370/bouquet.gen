@@ -9,9 +9,6 @@ import Plus from "./ui/Plus.js"
 import Trash from "./ui/Trash.js"
 import TrashOutline from "./ui/TrashOutline.js"
 
-
-
-
 const FlowerSuggestions = ({ id, onAdd, onRemove }) => {
   const [inputText, setInputText] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -23,7 +20,7 @@ const FlowerSuggestions = ({ id, onAdd, onRemove }) => {
     try {
       // const tmpResponse = {"numOfFlowers": "6", "flower1Name": "White Roses", "flower2Name": "Blue Hydrangeas", "flower3Name": "Calla Lilies", "flower4Name": "Daffodils", "flower5Name": "Iris", "flower6Name": "Chrysanthemums", "flower1Desc": "White Roses symbolize purity and new beginnings.", "flower2Desc": "Blue Hydrangeas represent gratitude and heartfelt emotions.", "flower3Desc": "Calla Lilies signify devotion and celebration.", "flower4Desc": "Daffodils symbolize new beginnings and good fortune.", "flower5Desc": "Irises symbolize faith, hope, and wisdom.", "flower6Desc": "Chrysanthemums symbolize loyalty and love for family.", "flower1Img": "https://m.media-amazon.com/images/I/713HM3r9nKL._AC_UF894,1000_QL80_.jpg", "flower2Img": "https://www.brighterblooms.com/cdn/shop/products/Nikko_Blue_Hydrangea_1_BB.jpg?v=1572546302&width=1000", "flower3Img": "https://www.bhg.com/thmb/Bw49DwP2S0BNy2nOvp-NSSaoIMA=/1858x0/filters:no_upscale():strip_icc()/two-Calla-lilies-b8c6af449bb14de7a83a86e7d7c8a3d1.jpg", "flower4Img": "https://cdn11.bigcommerce.com/s-1b9100svju/product_images/uploaded_images/img-3733.jpeg", "flower5Img": "https://my.clevelandclinic.org/-/scassets/Images/org/health/articles/22502-iris", "flower6Img": "https://www.gardendesign.com/pictures/images/675x529Max/site_3/paradiso-pink-mum-fall-flower-proven-winners_14469.jpg"} 
       // const flowerData = parseFlowerData(tmpResponse);
-      const response = await axios.post("http://127.0.0.1:5000/api/gen", { prompt: inputText });
+      const response = await axios.post("http://127.0.0.1:3001/api/gen", { prompt: inputText });
       console.log(response.data);
       const parsedData = JSON.parse(response.data);
       const flowerData = parseFlowerData(parsedData);

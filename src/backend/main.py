@@ -3,6 +3,7 @@ from flask_cors import CORS
 import os, json
 import requests
 from openai import OpenAI
+from waitress import serve
 
 client = OpenAI(
     api_key = os.environ.get("OPENAI_API_KEY"),
@@ -10,6 +11,8 @@ client = OpenAI(
 
 app = Flask(__name__)
 CORS(app)
+
+print("weee")
 
 def searchImage(query):
     api_key = os.environ.get("GI_api_key")
@@ -28,6 +31,7 @@ def searchImage(query):
 @app.route("/api/gen", methods=["POST"])
 
 def gen():
+    print("hit route")
     data = request.get_json()
     userInput = data.get('prompt')
 
@@ -77,4 +81,4 @@ def gen():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    serve(app, host="127.0.0.1", port=3001)

@@ -11,7 +11,7 @@ export default function Page(){
         <div className="flex flex-row items-center ">
           <div>
             <p className="text-[2.7rem] text-offwhite/90 leading-snug rounded ">
-              I'm Mohammed, and this is my first major website project! I made this website to help coordinate flowers in a bouquet towards an occasion
+              I&apos;m Mohammed, and this is my first major website project! I made this website to help coordinate flowers in a bouquet towards an occasion
               and their symbolism. Bouquet making goes so much further then aesthetic, as millions of flowers carry rich cultural and historical 
               significance that can make a bouquet that much more beautiful.
             </p>
