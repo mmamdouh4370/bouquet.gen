@@ -1,13 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-      async rewrites() {
+    rewrites: async () => {
       return [
         {
-          source: '/api/:path*',
-          destination: `http://127.0.0.1:3001/:path*`, // Proxy to Backend
+          source: '/src/backend/:path*',
+          destination:
+            process.env.NODE_ENV === 'development'
+              ? 'http://127.0.0.1:3001/api/:path*'
+              : '/api/',
         },
       ]
     },
-}
+  }
   
 export default nextConfig

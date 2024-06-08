@@ -3,7 +3,6 @@ from flask_cors import CORS
 import os, json
 import requests
 from openai import OpenAI
-from waitress import serve
 
 client = OpenAI(
     api_key = os.environ.get("OPENAI_API_KEY"),
@@ -15,12 +14,13 @@ CORS(app)
 print("weee")
 
 def searchImage(query):
+    print("imgs")
     api_key = os.environ.get("GI_api_key")
     cx = os.environ.get("GI_cx")
     
     search_type = "image"
     url = f"https://www.googleapis.com/customsearch/v1?key={api_key}&cx={cx}&searchType={search_type}&q={query}"
-
+    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
@@ -80,5 +80,3 @@ def gen():
     
 
 
-if __name__ == "__main__":
-    serve(app, host="127.0.0.1", port=3001)
