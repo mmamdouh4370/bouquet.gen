@@ -3,6 +3,13 @@
 import { useState } from "react";
 import axios from "axios";
 
+import Heart from "./ui/Heart.js"
+import HeartOutline from "./ui/HeartOutline.js"
+import Plus from "./ui/Plus.js"
+import Trash from "./ui/Trash.js"
+import TrashOutline from "./ui/TrashOutline.js"
+
+
 
 
 const FlowerSuggestions = ({ id, onAdd, onRemove }) => {
@@ -45,16 +52,16 @@ const FlowerSuggestions = ({ id, onAdd, onRemove }) => {
   return (
       <section className="relative flex-1 flex-col w-full flex bg-bone h-[32rem] rounded">
         <div className="absolute top-7 right-7 flex space-y-0 space-x-3 z-10">
-            <button className="text-tahit" onClick={onAdd}>Add</button>
+            <button className="text-tahit" onClick={onAdd}> <Plus /> </button>
             {id != 0 && (
-                <button className="text-tahit" onClick={onRemove}>Remove</button>
+                <button className="text-tahit" onClick={onRemove}> <TrashOutline /> </button>
             )}
         </div>
         
         {!isSubmitted ? (
           <div className="relative flex-1 flex-col w-full flex justify-center items-center space-y-5">
             <h1 className="text-2xl text-tahit/90">
-              {id} Generate your unique bouquet! 
+              id-{id} Generate your unique bouquet! 
             </h1>
             <form
               onSubmit={process}

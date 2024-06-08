@@ -26,13 +26,13 @@ export default function Navbar() {
   return (
     <nav className=" flex flex-row w-full p-8 bg-sage">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-offwhite text-3xl font-extrabold -ml-24">
+        <div className="text-offwhite text-4xl font-extrabold -ml-24">
           <a href="/" className="flex items-center">
             <img src="/favicon.ico" alt="logo" className="mr-2 h-8 w8" />
             Bouquet-gen
           </a>
         </div>
-        <div className="flex flex-row space-x-5 text-offwhite font-semibold text-[24px] -mr-20 mt-2.5">
+        <div className="flex flex-row space-x-5 text-offwhite font-semibold text-[24px] -mr-20 mt-2">
           <a href="/create" className="hover:text-white">
             Create
           </a>

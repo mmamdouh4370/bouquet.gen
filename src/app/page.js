@@ -14,7 +14,7 @@ export default function Home() {
         }}
       >
         <div className="absolute inset-0 backdrop-blur bg-black/80"></div>
-        <div className="absolute flex flex-row justify-start items-center left-[10rem] top-1/2 space-x-96">
+        <div className="absolute flex flex-row justify-start items-center left-[9.6rem] top-1/2 space-x-96">
           <div className="-mt-96 space-y-64">
             <p className="text-6xl text-offwhite font-bold z-10 transform -translate-y-[20%] leading-[4.5rem]">
               🌺Generate thousands <br />
