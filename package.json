@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "flask-dev": "pip3 install -r requirements.txt && python3 -m flask --app api/index run -p 3001",
+    "flask-dev": "python3 -m flask --app src/backend/main run -p 3001",
     "next-dev": "next dev",
     "dev": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
-    "build": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
