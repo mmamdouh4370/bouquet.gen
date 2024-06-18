@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "flask-dev": "python3 -m flask --app src/backend/main run -p 3001",
+    "flask-dev": "cd src/backend && py main.py",
     "next-dev": "next dev",
     "dev": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
     "build": "next build",
@@ -14,12 +14,15 @@
     "@clerk/nextjs": "^5.1.2",
     "@clerk/themes": "^2.1.7",
     "@headlessui/react": "^2.0.4",
+    "@prisma/client": "5.15.0",
     "axios": "^1.7.2",
     "concurrently": "^8.2.2",
     "flask-cors": "^0.0.1",
     "next": "^14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-router": "^6.23.1",
+    "svix": "^1.24.0"
   },
   "devDependencies": {
     "@types/node": "20.12.12",

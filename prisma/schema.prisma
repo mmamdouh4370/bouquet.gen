@@ -1,11 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider             = "prisma-client-py"
+  recursive_type_depth = "5"
+  interface            = "sync"
 }
 
 datasource db {
@@ -14,18 +10,15 @@ datasource db {
 }
 
 model User {
-  id       Int            @id @default(autoincrement())
-  email    String         @unique
-  name     String?
+  id       String            @id
   bouquets SavedBouquet[]
 }
 
 model SavedBouquet {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  prompt    String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  img         String
+  userId      String
+  user        User   @relation(fields: [userId], references: [id])
 }

@@ -1,26 +1,36 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os, json
-import requests
+import json, requests, os
+from dotenv import load_dotenv
 from openai import OpenAI
+from prisma import Prisma, register
+from datetime import datetime
+from waitress import serve
+from prisma import Prisma, register
+from prisma.models import User, SavedBouquet
+
+load_dotenv()
+
+db = Prisma()
+db.connect()
+register(db)
 
 client = OpenAI(
-    api_key = os.environ.get("OPENAI_API_KEY"),
+    api_key = os.getenv("OPENAI_API_KEY"),
 )
 
 app = Flask(__name__)
 CORS(app)
 
-print("weee")
 
 def searchImage(query):
-    print("imgs")
-    api_key = os.environ.get("GI_api_key")
-    cx = os.environ.get("GI_cx")
+    api_key = os.getenv("GI_API_KEY")
+    
+    cx = os.getenv("GI_CX")
     
     search_type = "image"
     url = f"https://www.googleapis.com/customsearch/v1?key={api_key}&cx={cx}&searchType={search_type}&q={query}"
-    print(url)
+
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
@@ -29,9 +39,7 @@ def searchImage(query):
     return None
 
 @app.route("/api/gen", methods=["POST"])
-
 def gen():
-    print("hit route")
     data = request.get_json()
     userInput = data.get('prompt')
 
@@ -47,7 +55,7 @@ def gen():
             Relate the flowers in meaning and symbolism to the input. 
             Make sure the flower combinations are aesthetic and meaningful. 
             Make sure to always refer to flowers as plural.
-            Be sure to recommend 4-7 flowers.
+            Be sure to recommend 4-6 flowers.
             Every message you respond with must STRICTLY follow this json format, do not add on anything extra 
             (adjust for number of flowers remembering a minimum of 4 and maximum of 7): 
             "numOfFlowers": "",
@@ -60,15 +68,14 @@ def gen():
 
             If the user input does not make sense, return "Please try again."
             """},
-            {"role": "user", "content": userInput}
-            
+            {"role": "user", "content": userInput} 
         ]
     )
 
     responseMessage = response.choices[0].message.content
     responseMessageDict = json.loads(responseMessage)
+
     numFlowers = int(responseMessageDict["numOfFlowers"])
-    print(numFlowers)
 
     for i in range(1, numFlowers+1): 
         flowerName = responseMessageDict[f"flower{i}Name"]
@@ -78,5 +85,53 @@ def gen():
     print(json.dumps(responseMessageDict))
     return jsonify(json.dumps(responseMessageDict))
     
+@app.route("/api/saveBouquet", methods=["POST"])
+def saveBouquet():
+    data = request.get_json()
+    userId = data.get('userId')
+    flowers = data.get('flowerList')
+    try:
+        for flower in flowers:
+            db.savedbouquet.create(
+                data={
+                    "name": flower['name'],
+                    "description": flower['description'],
+                    "img": flower['img'],
+                    "userId": userId
+                }
+            )
+        return jsonify({"status": "success"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to save data"}), 500
+        
+    return data
+
+@app.route("/api/createUser", methods=["POST"])
+def createUser():
+    data = request.get_json()
+    userId = data.get('id')
+    
+    isAlreadyUser = db.user.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if isAlreadyUser:
+        return jsonify({"status": "User ID already exists"})
+
+    try:
+        db.user.create(
+            data={
+                "id": userId
+            }
+        )
+        return jsonify({"status": "User created successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to create user"}), 500
 
 
+
+if __name__ == "__main__":
+    serve(app, host="127.0.0.1", port=3001)

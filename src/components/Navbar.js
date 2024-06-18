@@ -1,6 +1,12 @@
-"use client"
-import { useState } from 'react';
-import { SignInButton, SignOutButton, UserButton, useAuth } from "@clerk/nextjs";
+"use client";
+
+import { useState } from "react";
+import {
+  SignInButton,
+  SignOutButton,
+  UserButton,
+  useAuth,
+} from "@clerk/nextjs";
 
 const DotIcon = () => {
   return (
@@ -11,18 +17,17 @@ const DotIcon = () => {
     >
       <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
     </svg>
-  )
-}
-
+  );
+};
 
 export default function Navbar() {
-  const { sessionId } = useAuth();
+  const { isSignedIn } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-    
+
   return (
     <nav className=" flex flex-row w-full p-8 bg-sage">
       <div className="container mx-auto flex justify-between items-center">
@@ -39,28 +44,25 @@ export default function Navbar() {
           <a href="/about" className="hover:text-white">
             About
           </a>
-
-          {!sessionId ? (
-            <a href="/sign-in"
-            className="ml-2 bg-cream hover:bg-lightcream text-tahit text-xl font-bold py-3 px-6 rounded-md -mt-2"
+          {!isSignedIn ? (
+            <a
+              href="/sign-in"
+              className="ml-2 bg-cream hover:bg-lightcream text-tahit text-xl font-bold py-3 px-6 rounded-md -mt-2"
             >
               Sign in
             </a>
           ) : (
-            <div className="scale-150 mt-2"> 
-              <UserButton afterSignOutUrl="."> 
-                <UserButton.UserProfileLink
-                  label="Saved Bouquets"
-                  url="/saved"
-                  labelIcon={<DotIcon />}
-                />
-              </UserButton>
+            <div className="flex flex-row space-x-5">
+              <a href="/saved" className="hover:text-white">
+                Saved
+              </a>
+              <div className="scale-150 mt-2">
+                <UserButton afterSignOutUrl="."></UserButton>
+              </div>
             </div>
           )}
-          
         </div>
       </div>
     </nav>
   );
-
 }

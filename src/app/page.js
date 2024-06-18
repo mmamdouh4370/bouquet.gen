@@ -1,11 +1,9 @@
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <main className=" flex-col items-center md:px-0">
       <Navbar />
-
       <section
         className="relative flex-1 w-full bg-cover bg-center bg-no-repeat"
         style={{
@@ -29,7 +27,6 @@ export default function Home() {
               Get Started →
             </a>
           </div>
-
           <img
             src="/holdbouquet.jpg"
             className="object-cover h-80 w-96  scale-150 rounded-xl transform -translate-y-1/2 border-4 border-offwhite p-2"

@@ -17,8 +17,10 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: #383139;
+  background: #30322f;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
 }
 
 @layer utilities {
