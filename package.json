@@ -5,7 +5,8 @@
   "scripts": {
     "flask-dev": "cd src/backend && py main.py",
     "next-dev": "next dev",
-    "dev": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
+    "dev": "next dev",
+    "local": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -18,7 +19,7 @@
     "axios": "^1.7.2",
     "concurrently": "^8.2.2",
     "flask-cors": "^0.0.1",
-    "next": "^14.2.3",
+    "next": "^14.2.4",
     "react": "^18",
     "react-dom": "^18",
     "react-router": "^6.23.1",

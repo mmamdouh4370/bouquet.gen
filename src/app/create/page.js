@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import FlowerSuggestionsArr from "@/components/FlowerSuggestionsArr";
-
+import CreateBouquetArr from "@/components/CreateBouquetArr";
 
 export default function Page() {
   return (
     <main className="flex-col items-center md:px-0">
       <Navbar />
-      <FlowerSuggestionsArr />
+      <CreateBouquetArr />
     </main>
   );
 }

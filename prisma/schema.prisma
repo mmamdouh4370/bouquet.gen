@@ -10,15 +10,13 @@ datasource db {
 }
 
 model User {
-  id       String            @id
+  id       String         @id
   bouquets SavedBouquet[]
 }
 
 model SavedBouquet {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-  img         String
-  userId      String
-  user        User   @relation(fields: [userId], references: [id])
+  id      Int    @id @default(autoincrement())
+  bouquet String
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
 }

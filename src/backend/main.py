@@ -4,10 +4,10 @@ import json, requests, os
 from dotenv import load_dotenv
 from openai import OpenAI
 from prisma import Prisma, register
-from datetime import datetime
 from waitress import serve
 from prisma import Prisma, register
 from prisma.models import User, SavedBouquet
+from json import loads
 
 load_dotenv()
 
@@ -37,6 +37,31 @@ def searchImage(query):
         if "items" in data and len(data["items"]) > 0:
             return data["items"][0]["link"]
     return None
+
+@app.route("/api/createUser", methods=["POST"])
+def createUser():
+    data = request.get_json()
+    userId = data.get('id')
+    
+    isAlreadyUser = db.user.find_unique(
+        where={
+        'id': userId,
+        }
+    )
+    
+    if isAlreadyUser:
+        return jsonify({"status": "User ID already exists"}), 300
+
+    try:
+        db.user.create(
+            data={
+                "id": userId
+            }
+        )
+        return jsonify({"status": "User created successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to create user"}), 500
 
 @app.route("/api/gen", methods=["POST"])
 def gen():
@@ -82,24 +107,20 @@ def gen():
         searchQuery = f"{flowerName} flower"
         responseMessageDict[f"flower{i}Img"] = searchImage(searchQuery)
 
-    print(json.dumps(responseMessageDict))
     return jsonify(json.dumps(responseMessageDict))
     
 @app.route("/api/saveBouquet", methods=["POST"])
 def saveBouquet():
     data = request.get_json()
     userId = data.get('userId')
-    flowers = data.get('flowerList')
+    bouquet = data.get('bouquet')
     try:
-        for flower in flowers:
-            db.savedbouquet.create(
-                data={
-                    "name": flower['name'],
-                    "description": flower['description'],
-                    "img": flower['img'],
-                    "userId": userId
-                }
-            )
+        db.savedbouquet.create(
+            data={
+                "bouquet": bouquet,
+                "userId": userId
+            }
+        )
         return jsonify({"status": "success"}), 200
     except Exception as e:
         print(e)
@@ -107,31 +128,53 @@ def saveBouquet():
         
     return data
 
-@app.route("/api/createUser", methods=["POST"])
-def createUser():
-    data = request.get_json()
-    userId = data.get('id')
-    
-    isAlreadyUser = db.user.findUnique({
-        where: {
-            id: userId
-        }
-    })
-    if isAlreadyUser:
-        return jsonify({"status": "User ID already exists"})
-
+@app.route("/api/getSavedBouquets", methods=["GET"])
+def getSavedBouquets():
+    userId = request.args.get('userId')
     try:
-        db.user.create(
-            data={
-                "id": userId
+        savedBouquets = db.savedbouquet.find_many(
+            where={
+                'userId': userId,
             }
         )
-        return jsonify({"status": "User created successfully"}), 200
+        bouquetsList = []
+        for bouquet in savedBouquets:
+            bouquetDict = {
+                'id': str(bouquet.id),  
+                'bouquet': loads(bouquet.bouquet),  
+                'userId': bouquet.userId,
+                'user': bouquet.user  
+            }
+            bouquetsList.append(bouquetDict)
+        return jsonify({"bouquets": bouquetsList}), 200
     except Exception as e:
         print(e)
-        return jsonify({"error": "Failed to create user"}), 500
+        return jsonify({"error": "Failed to retrieve data"}), 500
 
-
+@app.route("/api/unSaveBouquet", methods=["DELETE"])
+def unSaveBouquet():
+    userId = request.args.get('userId')
+    bouquetId = request.args.get('bouquetId')
+    print(userId)
+    print(bouquetId)
+    try:
+        db.savedbouquet.delete(
+            where={
+                # 'AND': [
+                #     {
+                #         'userId': str(userId),
+                #     },
+                #     {
+                #         'id': int(bouquetId),  
+                #     },
+                # ],
+                'id': int(bouquetId)
+            }
+        )
+        return jsonify({"message": "Bouquet unsaved successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     serve(app, host="127.0.0.1", port=3001)

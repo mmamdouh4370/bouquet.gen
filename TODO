@@ -1,8 +1,5 @@
 - Footer
-- Fix processing anim
-- About page
-- Better loading animation (spinning flower, pulling petals, rain, seeds, wtever)
-- Saving bouquets
+- Loading animation (spinning flower, pulling petals, rain, seeds, wtever)
 - Exporting bouquets (text, json, save to notes, etc)
 - Comment out code properly
-- Add technical info to home page scroll
+- Adding more to home/about

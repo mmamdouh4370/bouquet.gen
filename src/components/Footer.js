@@ -1,3 +1,3 @@
-export default function Navbar() {
+export default function Footer() {
     
 }
