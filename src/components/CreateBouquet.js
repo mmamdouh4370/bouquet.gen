@@ -49,7 +49,7 @@ export default function CreateBouquet({ id, onSave, onAdd, onRemove }) {
       //     "https://www.realsimple.com/thmb/4lo5tC9pfPrPR8Xi2If8xC3pXWA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/daisey-flowers-GettyImages-1297653483-c905af6eaa9044378988a1316b7f01d7.jpg",
       // };
 
-      const response = await axios.post("http://127.0.0.1:3001/api/gen", {
+      const response = await axios.post("/api/gen", {
         prompt: inputText,
       });
 
