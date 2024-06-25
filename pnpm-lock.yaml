@@ -60,9 +60,6 @@ importers:
       postcss:
         specifier: ^8.4.38
         version: 8.4.38
-      prisma:
-        specifier: 5.11.0
-        version: 5.11.0
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4
@@ -2116,9 +2113,11 @@ snapshots:
     optionalDependencies:
       prisma: 5.11.0
 
-  '@prisma/debug@5.11.0': {}
+  '@prisma/debug@5.11.0':
+    optional: true
 
-  '@prisma/engines-version@5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102': {}
+  '@prisma/engines-version@5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102':
+    optional: true
 
   '@prisma/engines@5.11.0':
     dependencies:
@@ -2126,16 +2125,19 @@ snapshots:
       '@prisma/engines-version': 5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102
       '@prisma/fetch-engine': 5.11.0
       '@prisma/get-platform': 5.11.0
+    optional: true
 
   '@prisma/fetch-engine@5.11.0':
     dependencies:
       '@prisma/debug': 5.11.0
       '@prisma/engines-version': 5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102
       '@prisma/get-platform': 5.11.0
+    optional: true
 
   '@prisma/get-platform@5.11.0':
     dependencies:
       '@prisma/debug': 5.11.0
+    optional: true
 
   '@react-aria/focus@3.17.1(react@18.3.1)':
     dependencies:
@@ -3528,6 +3530,7 @@ snapshots:
   prisma@5.11.0:
     dependencies:
       '@prisma/engines': 5.11.0
+    optional: true
 
   prop-types@15.8.1:
     dependencies:
