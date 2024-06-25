@@ -3,9 +3,17 @@ from flask_cors import CORS
 import json, requests, os
 from dotenv import load_dotenv
 from openai import OpenAI
+from prisma import Prisma, register
+from waitress import serve
+from prisma import Prisma, register
+from prisma.models import User, SavedBouquet
 from json import loads
 
 load_dotenv()
+
+db = Prisma()
+db.connect()
+register(db)
 
 client = OpenAI(
     api_key = os.getenv("OPENAI_API_KEY"),
