@@ -175,6 +175,11 @@ def unSaveBouquet():
     except Exception as e:
         print(e)
         return jsonify({"error": str(e)}), 500
+    
+@app.route("/api/test", methods=["GET"])
+def test():
+    return {"status": "success", "message": "Integrate Flask Framework with Next.js"}
+
 
 if __name__ == "__main__":
     app.run()
