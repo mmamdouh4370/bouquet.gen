@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 const createUser = async (userId) => {
   try {
-    await axios.post("http://127.0.0.1:3001/api/createUser", { id: userId });
+    await axios.post("/dbApi/createUser", { id: userId });
   } catch (error) {
     console.error(":( fail on new user page", error);
   }

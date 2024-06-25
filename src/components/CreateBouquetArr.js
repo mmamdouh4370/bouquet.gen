@@ -20,7 +20,7 @@ export default function CreateBouquetArr() {
     console.log(bouquet);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3001/api/saveBouquet",
+        "/dbApi/saveBouquet",
         {
           userId,
           bouquet,

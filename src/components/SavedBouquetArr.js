@@ -13,7 +13,7 @@ export default function SavedBouquetArr() {
   const unsaveComponent = async (bouquetId) => {
     try {
       const response = await axios.delete(
-        "http://127.0.0.1:3001/api/unSaveBouquet",
+        "/dbApi/unsaveBouquet",
         {
           params: { userId, bouquetId },
         }
@@ -31,7 +31,7 @@ export default function SavedBouquetArr() {
       console.log("fetching");
       try {
         const response = await axios.get(
-          "http://127.0.0.1:3001/api/getSavedBouquets",
+          "/dbApi/getSavedBouquets",
           {
             params: { userId },
           }

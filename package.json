@@ -6,16 +6,16 @@
     "flask-dev": "set FLASK_DEBUG=1 && pip install -r requirements.txt && python -m flask -A api/index run -p 3001 --reload",
     "next-dev": "next dev",
     "dev": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
-    "build": "python3 -m prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "pip3 install -r requirements.txt"
+    "postinstall": "pip3 install -r requirements.txt && prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.1.6",
     "@clerk/themes": "^2.1.10",
     "@headlessui/react": "^2.1.0",
-    "@prisma/client": "5.11.0",
+    "@prisma/client": "^5.11.0",
     "axios": "^1.7.2",
     "concurrently": "^8.2.2",
     "flask-cors": "^0.0.1",
@@ -23,8 +23,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^6.24.0",
-    "svix": "^1.24.0",
-    "prisma": "5.11.0"
+    "svix": "^1.24.0"
   },
   "devDependencies": {
     "@types/node": "20.12.12",
@@ -32,6 +31,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
     "postcss": "^8.4.38",
+    "prisma": "^5.16.0",
     "tailwindcss": "^3.4.4"
   }
 }
