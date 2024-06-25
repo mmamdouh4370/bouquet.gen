@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "pip3 install -r requirements.txt && prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.1.6",
