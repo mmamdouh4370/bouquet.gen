@@ -11,9 +11,9 @@ from json import loads
 
 load_dotenv()
 
-# db = Prisma()
-# db.connect()
-# register(db)
+db = Prisma()
+db.connect()
+register(db)
 
 client = OpenAI(
     api_key = os.getenv("OPENAI_API_KEY"),
@@ -38,30 +38,30 @@ def searchImage(query):
             return data["items"][0]["link"]
     return None
 
-# @app.route("/api/createUser", methods=["POST"])
-# def createUser():
-#     data = request.get_json()
-#     userId = data.get('id')
+@app.route("/api/createUser", methods=["POST"])
+def createUser():
+    data = request.get_json()
+    userId = data.get('id')
     
-#     isAlreadyUser = db.user.find_unique(
-#         where={
-#         'id': userId,
-#         }
-#     )
+    isAlreadyUser = db.user.find_unique(
+        where={
+        'id': userId,
+        }
+    )
     
-#     if isAlreadyUser:
-#         return jsonify({"status": "User ID already exists"}), 300
+    if isAlreadyUser:
+        return jsonify({"status": "User ID already exists"}), 300
 
-#     try:
-#         db.user.create(
-#             data={
-#                 "id": userId
-#             }
-#         )
-#         return jsonify({"status": "User created successfully"}), 200
-#     except Exception as e:
-#         print(e)
-#         return jsonify({"error": "Failed to create user"}), 500
+    try:
+        db.user.create(
+            data={
+                "id": userId
+            }
+        )
+        return jsonify({"status": "User created successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to create user"}), 500
 
 @app.route("/api/gen", methods=["POST"])
 def gen():
@@ -109,72 +109,72 @@ def gen():
 
     return jsonify(json.dumps(responseMessageDict))
     
-# @app.route("/api/saveBouquet", methods=["POST"])
-# def saveBouquet():
-#     data = request.get_json()
-#     userId = data.get('userId')
-#     bouquet = data.get('bouquet')
-#     try:
-#         db.savedbouquet.create(
-#             data={
-#                 "bouquet": bouquet,
-#                 "userId": userId
-#             }
-#         )
-#         return jsonify({"status": "success"}), 200
-#     except Exception as e:
-#         print(e)
-#         return jsonify({"error": "Failed to save data"}), 500
+@app.route("/api/saveBouquet", methods=["POST"])
+def saveBouquet():
+    data = request.get_json()
+    userId = data.get('userId')
+    bouquet = data.get('bouquet')
+    try:
+        db.savedbouquet.create(
+            data={
+                "bouquet": bouquet,
+                "userId": userId
+            }
+        )
+        return jsonify({"status": "success"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to save data"}), 500
         
-#     return data
+    return data
 
-# @app.route("/api/getSavedBouquets", methods=["GET"])
-# def getSavedBouquets():
-#     userId = request.args.get('userId')
-#     try:
-#         savedBouquets = db.savedbouquet.find_many(
-#             where={
-#                 'userId': userId,
-#             }
-#         )
-#         bouquetsList = []
-#         for bouquet in savedBouquets:
-#             bouquetDict = {
-#                 'id': str(bouquet.id),  
-#                 'bouquet': loads(bouquet.bouquet),  
-#                 'userId': bouquet.userId,
-#                 'user': bouquet.user  
-#             }
-#             bouquetsList.append(bouquetDict)
-#         return jsonify({"bouquets": bouquetsList}), 200
-#     except Exception as e:
-#         print(e)
-#         return jsonify({"error": "Failed to retrieve data"}), 500
+@app.route("/api/getSavedBouquets", methods=["GET"])
+def getSavedBouquets():
+    userId = request.args.get('userId')
+    try:
+        savedBouquets = db.savedbouquet.find_many(
+            where={
+                'userId': userId,
+            }
+        )
+        bouquetsList = []
+        for bouquet in savedBouquets:
+            bouquetDict = {
+                'id': str(bouquet.id),  
+                'bouquet': loads(bouquet.bouquet),  
+                'userId': bouquet.userId,
+                'user': bouquet.user  
+            }
+            bouquetsList.append(bouquetDict)
+        return jsonify({"bouquets": bouquetsList}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to retrieve data"}), 500
 
-# @app.route("/api/unSaveBouquet", methods=["DELETE"])
-# def unSaveBouquet():
-#     userId = request.args.get('userId')
-#     bouquetId = request.args.get('bouquetId')
-#     print(userId)
-#     print(bouquetId)
-#     try:
-#         db.savedbouquet.delete(
-#             where={
-#                 # 'AND': [
-#                 #     {
-#                 #         'userId': str(userId),
-#                 #     },
-#                 #     {
-#                 #         'id': int(bouquetId),  
-#                 #     },
-#                 # ],
-#                 'id': int(bouquetId)
-#             }
-#         )
-#         return jsonify({"message": "Bouquet unsaved successfully"}), 200
-#     except Exception as e:
-#         print(e)
-#         return jsonify({"error": str(e)}), 500
+@app.route("/api/unSaveBouquet", methods=["DELETE"])
+def unSaveBouquet():
+    userId = request.args.get('userId')
+    bouquetId = request.args.get('bouquetId')
+    print(userId)
+    print(bouquetId)
+    try:
+        db.savedbouquet.delete(
+            where={
+                # 'AND': [
+                #     {
+                #         'userId': str(userId),
+                #     },
+                #     {
+                #         'id': int(bouquetId),  
+                #     },
+                # ],
+                'id': int(bouquetId)
+            }
+        )
+        return jsonify({"message": "Bouquet unsaved successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500
     
 @app.route("/api/test", methods=["GET"])
 def test():
