@@ -9,7 +9,7 @@ The tech stack is:
 - **Frontend** - NextJS, TailwindCSS, Clerk
 - **Backend** - Flask, Prisma
 - **DB** - Postgres
-- **Deployment** - Vercel for the frontend
+- **Deployment** - Vercel for the front and back end
 
 For now the website simply prompts OpenAI's api and parses it's response. However in the future I plan to make my own NLP specifically for this website (which is why I used Flask for this project!). I choose NextJS and TailwindCSS to create a reactive and clean ui to complement the aesthetic of my websites theme. I also used Clerk and Prisma to streamline my process and have easier access to my DB and authentication.
 
