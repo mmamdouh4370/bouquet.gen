@@ -88,7 +88,7 @@ log: logging.Logger = logging.getLogger(__name__)
 SCHEMA_PATH = Path('C:/Users/mmamd/Documents/GitHub/bouquetgen/prisma/schema.prisma')
 PACKAGED_SCHEMA_PATH = Path(__file__).parent.joinpath('schema.prisma')
 ENGINE_TYPE: EngineType = EngineType.binary
-BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'windows': 'C:\\Users\\mmamd\\.cache\\prisma-python\\binaries\\5.11.0\\efd2449663b3d73d637ea1fd226bafbcf45b3102\\node_modules\\prisma\\query-engine-windows.exe'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
+BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'windows': 'C:\\Users\\mmamd\\Documents\\GitHub\\bouquetgen\\node_modules\\.pnpm\\prisma@5.11.0\\node_modules\\prisma\\query-engine-windows.exe'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
 
 
 class Prisma(SyncBasePrisma):
