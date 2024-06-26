@@ -20,7 +20,7 @@ export default function CreateBouquetArr() {
     console.log(bouquet);
     try {
       const response = await axios.post(
-        "/dbApi/saveBouquet",
+        "http://localhost:3000/dbApi/saveBouquet",
         {
           userId,
           bouquet,
@@ -29,6 +29,22 @@ export default function CreateBouquetArr() {
     } catch (error) {
       console.log("save failed :<", error);
     }
+  };
+
+  const unsaveComponent = async (bouquetId) => {
+    try {
+      const response = await axios.delete(
+        "http://localhost:3000/dbApi/unsaveBouquet",
+        {
+          params: { userId, bouquetId },
+        }
+      );
+    } catch (error) {
+      console.log("unsave failed :<");
+    }
+    console.log(userId);
+    console.log(bouquetId);
+    setComponents(components.filter((component) => component.id != bouquetId));
   };
 
   return (
