@@ -20,7 +20,7 @@ export default function CreateBouquetArr() {
     console.log(bouquet);
     try {
       const response = await axios.post(
-        "http://localhost:3000/dbApi/saveBouquet",
+        "/dbApi/saveBouquet",
         {
           userId,
           bouquet,
@@ -34,7 +34,7 @@ export default function CreateBouquetArr() {
   const unsaveComponent = async (bouquetId) => {
     try {
       const response = await axios.delete(
-        "http://localhost:3000/dbApi/unsaveBouquet",
+        "/dbApi/unsaveBouquet",
         {
           params: { userId, bouquetId },
         }

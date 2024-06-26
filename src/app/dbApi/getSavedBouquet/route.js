@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export async function GET(request){
+export async function POST(request){
     try {
-        const url = new URL(request.url);
-        const userId = url.searchParams.get('userId');
+        const res = await request.json();
+        const {userId} = res;
+
         const result = await prisma.SavedBouquet.findMany({
             where : {
                 userId: userId

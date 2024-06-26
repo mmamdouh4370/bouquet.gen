@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export async function DELETE(request){
+export async function POST(request){
     try {
-        const url = new URL(request.url);
-        const userId = url.searchParams.get('userId');
-        const bouquetId = url.searchParams.get('bouquetId');
+        const res = await request.json();
+        const {userId, bouquetId} = res;
         const result = await prisma.SavedBouquet.delete({
             where : {
                 id: parseInt(bouquetId)
