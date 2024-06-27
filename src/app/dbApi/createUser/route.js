@@ -1,18 +1,17 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-
 export async function POST(request){
     try {
-        console.log("hit!");
         const res = await request.json();
-        const {id} = res;
+        const {userId} = res;
+        console.log(userId);
         const isAlreadyUser = await prisma.user.findUnique({
             where: {
                 id: id,
             }
         })
-        
+        console.log(id);
         if (isAlreadyUser != null){
             console.log(isAlreadyUser);
             return NextResponse.json({status: "User ID already exists"});
@@ -25,8 +24,9 @@ export async function POST(request){
         })
 
         return NextResponse.json({result});
+        return NextResponse.json({"message": "Bouquet unsaved successfully"}, { status: 200 });
     } catch (error){
         console.error("Error creating user:", error);
-    return NextResponse.json({ status: "error", error: error.message }, { status: 500 });
+        return NextResponse.json({ status: "error", error: error.message }, { status: 500 });
     }
 }

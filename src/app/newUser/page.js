@@ -5,20 +5,31 @@ import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-const createUser = async (userId) => {
-  try {
-    const response = await axios.post("/dbApi/createUser", { id: userId });
-  } catch (error) {
-    console.error(":( fail on new user page", error);
-  }
-};
-
 export default function Page() {
+  const createUser = async (userId) => {
+    try {
+      const response = await axios.post(
+        "https://bouqet.vercel.app/dbApi/createUser",
+        {
+          userId
+        }
+      );
+    } catch (error) {
+      console.error(":( fail on new user page", error);
+    }
+  };
+
   const { userId } = useAuth();
 
   if (!userId) redirect("/");
 
   createUser(userId);
 
-  redirect("/");
+  // redirect("/");
+
+  return (
+    <main>
+
+    </main>
+  )
 }
