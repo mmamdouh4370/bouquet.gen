@@ -25,7 +25,7 @@ export default function Page() {
 
   createUser(userId);
 
-  // redirect("/");
+  redirect("/");
 
   return (
     <main>
