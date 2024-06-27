@@ -4,8 +4,8 @@ import prisma from "@/lib/prisma";
 export async function POST(request){
     try {
         const res = await request.json();
-        const {userId} = res;
-        console.log(userId);
+        const {id} = res;
+        console.log(id);
         const isAlreadyUser = await prisma.user.findUnique({
             where: {
                 id: id,

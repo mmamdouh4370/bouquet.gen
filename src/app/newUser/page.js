@@ -6,12 +6,12 @@ import { useAuth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  const createUser = async (userId) => {
+  const createUser = async (id) => {
     try {
       const response = await axios.post(
         "https://bouqet.vercel.app/dbApi/createUser",
         {
-          userId
+          id
         }
       );
     } catch (error) {
