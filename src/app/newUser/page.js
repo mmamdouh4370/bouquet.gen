@@ -9,7 +9,7 @@ export default function Page() {
   const createUser = async (id) => {
     try {
       const response = await axios.post(
-        "https://bouqet.vercel.app/dbApi/createUser",
+        "https://bouquetgen.vercel.app/dbApi/createUser",
         {
           id
         }
