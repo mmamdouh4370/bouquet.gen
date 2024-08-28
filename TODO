@@ -4,3 +4,5 @@
 - Comment out code properly
 - Adding more to home/about
 - Proper unsave in the create page
+- Update images to use proper tag + compression + alt text
+- Recheck use effect dependencies
